@@ -1,5 +1,6 @@
 import { Inngest } from "inngest";
 import User from "../models/User.js";
+import connectDB from "../config/db.js";
 
 export const inngest = new Inngest({ id: "pingup-rec2026" });
 
@@ -10,6 +11,8 @@ const syncUserCreation = inngest.createFunction(
     triggers: { event: "clerk/user.created" },
   },
   async ({ event }) => {
+    await connectDB();
+
     const { id, first_name, last_name, email_addresses, image_url } =
       event.data;
 
@@ -32,36 +35,41 @@ const syncUserCreation = inngest.createFunction(
     await User.create({
       _id: id,
       email,
-      full_name: first_name + " " + last_name,
+      full_name: [first_name, last_name].filter(Boolean).join(" "),
       profile_picture: image_url,
       username,
     });
   },
 );
+
 const syncUserUpdation = inngest.createFunction(
   {
     id: "update-user-form-clerk",
     triggers: { event: "clerk/user.updated" },
   },
   async ({ event }) => {
+    await connectDB();
+
     const { id, first_name, last_name, email_addresses, image_url } =
       event.data;
-    const updatedUserData = {
-      email: email_addresses[0].email_address,
-      full_name: first_name + " " + last_name,
+
+    await User.findByIdAndUpdate(id, {
+      email: email_addresses?.[0]?.email_address,
+      full_name: [first_name, last_name].filter(Boolean).join(" "),
       profile_picture: image_url,
-    };
-    await User.findByIdAndUpdate(id, updatedUserData);
+    });
   },
 );
+
 const syncUserDeletion = inngest.createFunction(
   {
     id: "delete-user-form-clerk",
     triggers: { event: "clerk/user.deleted" },
   },
   async ({ event }) => {
-    const { id } = event.data;
+    await connectDB();
 
+    const { id } = event.data;
     await User.findByIdAndDelete(id);
   },
 );
