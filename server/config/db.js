@@ -12,7 +12,8 @@ const connectDB = async () => {
 
   if (!cached.promise) {
     cached.promise = mongoose
-      .connect(`${process.env.MONGODB_URL}/pingup`, {
+      .connect(process.env.MONGODB_URL, {
+        dbName: "pingup",
         serverSelectionTimeoutMS: 8000,
       })
       .then((m) => {
