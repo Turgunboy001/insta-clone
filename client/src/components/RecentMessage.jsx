@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { dummyRecentMessagesData } from "../assets/assets";
 import { Link } from "react-router-dom";
+import moment from 'moment'
 
 const RecentMessage = () => {
   const [messages, setMessages] = useState([]);
@@ -31,7 +32,9 @@ const RecentMessage = () => {
             <div className="w-full">
               <div className="flex justify-between">
                 <p className="font-medium">{message.from_user_id.full_name}</p>
-                <p className="text-[10] text-slate-400">{message.createdAt}</p>
+                <p className="text-[10px] text-slate-400">
+                  {moment(message.createdAt).fromNow()}
+                </p>
               </div>
               <div className="flex justify-between">
                 <p className="text-gray-500">

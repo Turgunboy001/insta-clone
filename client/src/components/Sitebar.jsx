@@ -1,11 +1,14 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { assets } from "../assets/assets";
+import { assets, dummyUserData } from "../assets/assets";
 import MenuItems from "./MenuItems";
 import { CirclePlus, LogOutIcon, User, UserCircle } from "lucide-react";
+import { useClerk, UserButton } from "@clerk/react";
 
 const Sitebar = ({ sidebarOpen, setSidebarOpen }) => {
   const navigate = useNavigate();
+  const user = dummyUserData
+  const { signOut } = useClerk()
 
   return (
     <div
@@ -33,13 +36,13 @@ const Sitebar = ({ sidebarOpen, setSidebarOpen }) => {
       </div>
       <div className="w-full border-t border-gray-400 p-4 px-7 flex items-center justify-between">
         <div className="flex gap-2 items-center cursor-pointer">
-          <UserCircle />
+          <UserButton />
           <div className="">
-            <h1 className="text-sm font-medium">ali</h1>
-            <p className="text-xs text-gray-500">@gmail.com</p>
+            <h1 className="text-sm font-medium">{user.full_name}</h1>
+            <p className="text-xs text-gray-500">{user.username}</p>
           </div>
         </div>
-        <LogOutIcon className="w-4.5 text-gray-400 hover:text-gray-700 transition cursor-pointer" />
+        <LogOutIcon onClick={signOut} className="w-4.5 text-gray-400 hover:text-gray-700 transition cursor-pointer" />
       </div>
     </div>
   );

@@ -15,16 +15,16 @@ import {
 } from "lucide-react";
 
 const Connections = () => {
-  const [currentTab, setCurrentTab] = useState("");
   const navigate = useNavigate();
+
+  const [currentTab, setCurrentTab] = useState("Followers");
 
   const dataArray = [
     { label: "Followers", value: followers, icon: User },
     { label: "Following", value: following, icon: UserCheck },
     { label: "Pending", value: pendingConections, icon: UserRoundPen },
-    { label: "Conections", value: connections, icon: UserPlus },
+    { label: "Connections", value: connections, icon: UserPlus },
   ];
-
   return (
     <div className="min-h-screen bg-slate-50">
       <div className="max-w-6xl mx-auto p-6">
@@ -94,19 +94,19 @@ const Connections = () => {
                       </button>
                     }
                     {currentTab === "Following" && (
-                      <button className="w-full p-2 text-sm rounded bg-slate-800 hover:bg-slate-200 text-black active:scale-95 transition cursor-pointer">
+                      <button className="w-full p-2 text-sm rounded bg-slate-100 hover:bg-slate-200 text-black active:scale-95 transition cursor-pointer">
                         Unfollow
                       </button>
                     )}
                     {currentTab === "Pending" && (
-                      <button className="w-full p-2 text-sm rounded bg-slate-800 hover:bg-slate-200 text-black active:scale-95 transition cursor-pointer">
+                      <button className="w-full p-2 text-sm rounded bg-slate-100 hover:bg-slate-200 text-black active:scale-95 transition cursor-pointer">
                         Accept
                       </button>
                     )}
                     {currentTab === "Connections" && (
                       <button
                         onClick={() => navigate(`/messages/${user._id}`)}
-                        className="w-full p-2 text-sm rounded bg-slate-800 hover:bg-slate-200 text-black active:scale-95 transition cursor-pointer flex items-center justify-center gap-1"
+                        className="w-full p-2 text-sm rounded bg-slate-100 hover:bg-slate-200 text-black active:scale-95 transition cursor-pointer flex items-center justify-center gap-1"
                       >
                         <MessageSquare className="w-4 h-4" />
                         Message

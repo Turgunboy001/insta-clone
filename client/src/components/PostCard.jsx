@@ -2,6 +2,7 @@ import { BadgeCheck, Heart, MessageCircle, Share2 } from "lucide-react";
 import React, { useState } from "react";
 import { dummyUserData } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const PostCard = ({ post }) => {
   const [likes, setLikes] = useState(post.likes_count);
@@ -11,7 +12,7 @@ const PostCard = ({ post }) => {
     '<span class="text-indigo-600">$1</span>',
   );
 
-  const handleLikes = async () => {};
+  const handleLikes = async () => { };
 
   const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ const PostCard = ({ post }) => {
             <BadgeCheck className="w-4 h-4 text-blue-400" />
           </div>
           <div>
-            @{post.user.username} • {post.createdAt}
+            @{post.user.username} • {moment(post.createdAt).fromNow()}
           </div>
         </div>
       </div>

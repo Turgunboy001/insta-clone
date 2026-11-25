@@ -3,6 +3,7 @@ import { dummyStoriesData } from "../assets/assets";
 import { Plus } from "lucide-react";
 import StoryModal from "./StoryModal";
 import StoryViewer from "./StoryViewer";
+import moment from "moment";
 
 const StoriesBar = () => {
   const [stories, setStories] = useState([]);
@@ -49,8 +50,8 @@ const StoriesBar = () => {
             <p className="absolute top-18 left-3 text-white/60 text-sm truncate max-w-24">
               {story.content}
             </p>
-            <p className="text-white absolute bottom-1 ring-2 z-10 text-xs">
-              {story.createdAt}
+            <p className="text-white absolute bottom-1 right-2 z-10 text-xs">
+              {moment(story.createdAt).fromNow()}
             </p>
 
             {story.media_type !== "text" && (

@@ -1,7 +1,7 @@
 import React from "react";
 import { assets } from "../assets/assets";
 import { Star } from "lucide-react";
-import { SiNginx } from "react-icons/si";
+import { SignIn } from "@clerk/react";
 const Login = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -49,7 +49,7 @@ const Login = () => {
 
       {/* right side login form  */}
       <div className="flex-1 flex items-center justify-center p-6 sm:p-10">
-        <SiNginx />
+        <SignIn />
       </div>
     </div>
   );

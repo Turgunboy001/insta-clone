@@ -9,11 +9,18 @@ import Discover from "./pages/Discover";
 import Profile from "./pages/Profile";
 import CreatePost from "./pages/CreatePost";
 import Layout from "./pages/Layout";
+import { useUser } from "@clerk/react";
 
 const App = () => {
-  const useUser = true;
+  // const useUser = true;
 
-  const user = useUser;
+  const { user, isLoaded } = useUser();
+
+  console.log(user);
+  // Clerk yuklanguncha kutamiz
+  if (!isLoaded) return null; // xohlasangiz bu yerga loading spinner qo'ying
+
+
   return (
     <>
       <Routes>
