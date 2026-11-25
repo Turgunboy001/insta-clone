@@ -1,5 +1,5 @@
 import { Inngest } from "inngest";
-import User from "../models/User";
+import User from "../models/User.js";
 
 export const inngest = new Inngest({ id: "pingup-rec2026" });
 
@@ -48,7 +48,7 @@ const syncUserUpdation = inngest.createFunction(
       event.data;
     const updatedUserData = {
       email: email_addresses[0].email_address,
-      full_name: first_name + "" + last_name,
+      full_name: first_name + " " + last_name,
       profile_picture: image_url,
     };
     await User.findByIdAndUpdate(id, updatedUserData);
