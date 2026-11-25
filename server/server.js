@@ -17,4 +17,8 @@ app.use("/api/inngest", serve({ client: inngest, functions }));
 
 const PORT = process.env.PORT || 4000;
 
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+if (process.env.NODE_ENV !== "production") {
+  app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+}
+
+export default app;
