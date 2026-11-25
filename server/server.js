@@ -2,12 +2,9 @@ import { serve } from "inngest/express";
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
-import connectDB from "./config/db.js";
 import { inngest, functions } from "./inngest/index.js";
 
 const app = express();
-
-await connectDB();
 
 app.use(express.json());
 app.use(cors());
@@ -22,4 +19,3 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 export default app;
-
